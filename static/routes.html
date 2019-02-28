@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>routes</title>
+    <style>
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>node服务器路由设计Demo</h1>
+    <h3>1. <a href="http://localhost:8100/login">login-demo:   http://localhost:8100/login</a></h3>
+    <h3>2. <a href="http://localhost:8100/music-player">music-player-demo:  http://localhost:8100/music-player</a></h3>
+    <h3>3. ajax请求，获取天气</h3>
+    <button>获取北京天气</button>
+    <div class="response"></div>
+  </body>
+  <script>
+    document.querySelector('button').onclick=function(){
+      var xhr = new XMLHttpRequest()
+      xhr.open('GET', 'http://localhost:8100/getWeather?city=beijing', true)
+      xhr.send()
+      xhr.onload = function(){
+        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304)   {
+          document.querySelector('.response').innerHTML = this.responseText
+        } else {
+          console.log('服务器异常')
+        }
+      }
+    }
+  </script>
+</html>
